@@ -23,7 +23,7 @@ Simple star rating component made on Vue.js with a bunch of options and ability 
 
 <h2>Usage</h2>
 <p>After installation, all you need is import component, using the next syntax:</p>
-<pre>import StarRating from "stars-rating-component-vue"</pre>
+<pre>import StarsRating from "stars-rating-component-vue"</pre>
 <p>and bind needed property with the component using "v-model".</p>
 
 <h2>Options and configurations</h2>
