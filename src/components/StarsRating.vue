@@ -109,97 +109,125 @@ export default {
       type: Object,
       required: false,
       validator: function(options) {
-        if (!"fill" in options) {
+        if ("fill" in options) {
+          if (typeof options.fill != "string") {
+            console.error(
+              "[Star Rating Widget]: Type of 'fill' property must be 'sring'"
+            );
+          }
+        } else {
           options.fill = "#DDD";
-        } else if (typeof options.fill != "string") {
-          console.error(
-            "[Star Rating Widget]: Type of 'fill' property must be 'sring'"
-          );
         }
 
-        if (!"stroke" in options) {
+        if ("stroke" in options) {
+          if (typeof options.stroke !== "string") {
+            console.error(
+              "[Star Rating Widget]: Type of 'stroke' property must be 'sring'"
+            );
+          }
+        } else {
           options.stroke = "none";
-        } else if (typeof options.stroke != "string") {
-          console.error(
-            "[Star Rating Widget]: Type of 'stroke' property must be 'sring'"
-          );
         }
 
-        if (!"strokeWidth" in options) {
+        if ("strokeWidth" in options) {
+          if (typeof options.strokeWidth !== "number") {
+            console.error(
+              "[Star Rating Widget]: Type of 'strokeWidth' property must be 'number'"
+            );
+          }
+        } else {
           options.strokeWidth = 2;
-        } else if (typeof options.strokeWidth != "number") {
-          console.error(
-            "[Star Rating Widget]: Type of 'strokeWidth' property must be 'number'"
-          );
         }
 
-        if (!"highlighted" in options) {
+        if ("highlighted" in options) {
+          if (typeof options.highlighter !== "string") {
+            console.error(
+              "[Star Rating Widget]: Type of 'highlighted' property must be 'string'"
+            );
+          }
+        } else {
           options.highlighted = "#FFDF12";
         }
 
-        if (!"hover" in options) {
+        if ("hover" in options) {
+          if (typeof options.hover !== "string") {
+            console.error(
+              "[Star Rating Widget]: Type of 'hover' property must be 'sring'"
+            );
+          }
+        } else {
           options.hover = "#FFED84";
-        } else if (typeof options.highlighted != "string") {
-          console.error(
-            "[Star Rating Widget]: Type of 'highlighted' property must be 'sring'"
-          );
         }
 
-        if (!"size" in options) {
+        if ("size" in options) {
+          if (typeof options.size !== "number") {
+            console.error(
+              "[Star Rating Widget]: Type of 'size' property must be 'number'"
+            );
+          }
+        } else {
           options.size = 25;
-        } else if (typeof options.size != "number") {
-          console.error(
-            "[Star Rating Widget]: Type of 'size' property must be 'number'"
-          );
         }
 
-        if (!"marginRight" in options) {
+        if ("marginRight" in options) {
+          if (typeof options.marginRight !== "number") {
+            console.error(
+              "[Star Rating Widget]: Type of 'marginRight' property must be 'number'"
+            );
+          }
+        } else {
           options.marginRight = 3;
-        } else if (typeof options.marginRight != "number") {
-          console.error(
-            "[Star Rating Widget]: Type of 'marginRight' property must be 'number'"
-          );
         }
 
-        if (!"readOnly" in options) {
+        if ("readOnly" in options) {
+          if (typeof options.readOnly !== "boolean") {
+            console.error(
+              "[Star Rating Widget]: Type of 'readOnly' property must be 'boolean'"
+            );
+          }
+        } else {
           options.readOnly = false;
-        } else if (typeof options.readOnly != "boolean") {
-          console.error(
-            "[Star Rating Widget]: Type of 'readOnly' property must be 'boolean'"
-          );
         }
 
-        if (!"rating" in options) {
+        if ("rating" in options) {
+          if (typeof options.rating !== "number") {
+            console.error(
+              "[Star Rating Widget]: Type of 'rating' property must be 'number'"
+            );
+          }
+        } else {
           options.rating = 0;
-        } else if (typeof options.rating != "number") {
-          console.error(
-            "[Star Rating Widget]: Type of 'rating' property must be 'number'"
-          );
         }
 
-        if (!"starsQuantity" in options) {
+        if ("starsQuantity" in options) {
+          if (typeof options.starsQuantity != "number") {
+            console.error(
+              "[Star Rating Widget]: Type of 'starsQuantity' property must be 'number'"
+            );
+          }
+        } else {
           options.starsQuantity = 10;
-        } else if (typeof options.starsQuantity != "number") {
-          console.error(
-            "[Star Rating Widget]: Type of 'starsQuantity' property must be 'number'"
-          );
         }
 
-        if (!"d" in options) {
+        if ("d" in options) {
+          if (typeof options.d != "string") {
+            console.error(
+              "[Star Rating Widget]: Type of 'd' property must be 'sring'"
+            );
+          }
+        } else {
           options.d =
             "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z";
-        } else if (typeof options.d != "string") {
-          console.error(
-            "[Star Rating Widget]: Type of 'd' property must be 'sring'"
-          );
         }
 
-        if (!"viewBox" in options) {
+        if ("viewBox" in options) {
+          if (typeof options.viewBox != "string") {
+            console.error(
+              "[Star Rating Widget]: Type of 'viewBox' property must be 'sring'"
+            );
+          }
+        } else {
           options.viewBox = "0 0 100 100";
-        } else if (typeof options.viewBox != "string") {
-          console.error(
-            "[Star Rating Widget]: Type of 'viewBox' property must be 'sring'"
-          );
         }
 
         return options;
@@ -216,7 +244,8 @@ export default {
           readOnly: false,
           rating: 0,
           marginRight: 5,
-          d: "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z",
+          d:
+            "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z",
           viewBox: "0 0 100 100"
         };
       }
