@@ -140,7 +140,7 @@ export default {
         }
 
         if ("highlighted" in options) {
-          if (typeof options.highlighter !== "string") {
+          if (typeof options.highlighted !== "string") {
             console.error(
               "[Star Rating Widget]: Type of 'highlighted' property must be 'string'"
             );
