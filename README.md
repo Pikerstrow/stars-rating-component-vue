@@ -99,12 +99,12 @@ Simple star rating component made on Vue.js with a bunch of options and ability 
         <tr>
             <td>d</td>
             <td>string</td>
-            <td>Using this property you can change default stars for any other elements! This property is 'd' attribute of SVG 'path' element. You can read more about it on <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d">MDN</a>. <b>Important!</b> For correct replacing default stars, you ned to also set 'viewBox' property... </td>
+            <td>Using this property you can change default stars for any other elements! This property is 'd' attribute of SVG 'path' element. You can read more about it on <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d">MDN</a>. <b>Important!</b> For correct replacing of the default stars, you ned to also set 'viewBox' property... </td>
         </tr>
         <tr>
             <td>viewBox</td>
             <td>string</td>
-            <td>Another property which allows to change default stars for any other elements...</td>
+            <td>Another property which allows to change the default stars for any other elements...</td>
         </tr>
     </tbody>
 </table>
