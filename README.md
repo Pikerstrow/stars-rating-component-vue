@@ -8,11 +8,12 @@ Simple star rating component made on Vue.js with a bunch of options and ability 
 
 <h2>Features</h2>
 <ul>
-<li>Customizable number of stars</li>
 <li>Stars are SVG elements</li>
+<li>Customizable number of stars</li>
+<li>Stars can be substituted by other elements</li>
 <li>Each star is divided on two halves (there is ability to set a 3.5 rating for example)</li>
 <li>Customizable color, size, space between stars, color on hover, color on select, color of stroke and stroke width.</li>
-<li>Read only option included</li>
+<li>Read only option'</li>
 </ul>
 
 <h2>Demo</h2>
@@ -95,6 +96,16 @@ Simple star rating component made on Vue.js with a bunch of options and ability 
             <td>number</td>
             <td>If readOnly is true, this property will be used for showing correct rating</td>
         </tr>
+        <tr>
+            <td>d</td>
+            <td>string</td>
+            <td>Using this property you can change default stars for any other elements! This property is 'd' attribute of SVG 'path' element. You can read more about it on <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d">MDN</a>. <b>Important!</b> For correct replacing default stars, you ned to also set 'viewBox' property... </td>
+        </tr>
+        <tr>
+            <td>viewBox</td>
+            <td>string</td>
+            <td>Another property which allows to change default stars for any other elements...</td>
+        </tr>
     </tbody>
 </table>
 
@@ -148,6 +159,14 @@ Simple star rating component made on Vue.js with a bunch of options and ability 
             <td>rating</td>
             <td>0</td>
         </tr>
+        <tr>
+            <td>d</td>
+            <td>M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z</td>
+        </tr>
+        <tr>
+            <td>viewBox</td>
+            <td>0 0 100 100</td>
+        </tr>
     </tbody>
 </table>
 
@@ -163,7 +182,9 @@ Simple star rating component made on Vue.js with a bunch of options and ability 
         size: 25,
         readOnly: false,
         rating: 0,
-        marginRight: 5
+        marginRight: 5,
+        d: "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z",
+        viewBox: "0 0 100 100"
     }
 </pre>
 

@@ -5,38 +5,43 @@
         v-for="(val, index) in available_values"
         :key="index"
         class="star-container"
-        :style="{width: options.size + 'px', height: options.height + 'px', marginRight: options.marginRight + 'px'}"
+        :style="{width: options.size + 'px', height: options.size + 'px', marginRight: options.marginRight + 'px'}"
       >
         <svg
           class="star-svg full-star"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 100 100"
+          :viewBox="options.viewBox"
           :style="{width: options.size + 'px', height: options.height + 'px'}"
         >
           <path
-            :rating="val[1]"
+            :data-rating="val[1]"
             class="widget-rating-star"
             :stroke="options.stroke"
             :fill="options.fill"
             :stroke-width="options.strokeWidth + 'px'"
-            d="M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z"
+            :d="options.d"
           ></path>
         </svg>
-        <svg
-          class="star-svg half-star"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 50 100"
-          :style="{width: (options.size / 2) + 'px', height: options.height + 'px'}"
+        <div
+          :style="{width: halfStarWidth + 'px', height: options.size + 'px'}"
+          class="half-star-container"
         >
-          <path
-            :rating="val[0]"
-            class="widget-rating-star"
-            :stroke="options.stroke"
-            :fill="options.fill"
-            :stroke-width="options.strokeWidth + 'px'"
-            d="M50 0 l-15 35 -35 5 25 24 -6 35 31 -18"
-          ></path>
-        </svg>
+          <svg
+            class="star-svg full-star"
+            xmlns="http://www.w3.org/2000/svg"
+            :viewBox="options.viewBox"
+            :style="{width: options.size + 'px', height: options.height + 'px'}"
+          >
+            <path
+              :data-rating="val[0]"
+              class="widget-rating-star"
+              :stroke="options.stroke"
+              :fill="options.fill"
+              :stroke-width="options.strokeWidth + 'px'"
+              :d="options.d"
+            ></path>
+          </svg>
+        </div>
       </div>
     </div>
 
@@ -46,44 +51,48 @@
         :key="index"
         @mouseleave="removeHoverEffect"
         class="star-container"
-        :style="{width: options.size + 'px', height: options.height + 'px', marginRight: options.marginRight + 'px'}"
+        :style="{width: options.size + 'px', height: options.size + 'px', marginRight: options.marginRight + 'px'}"
       >
         <svg
           @click="setRating(val[1])"
           @mouseenter="hoverEffect(val[1])"
           class="star-svg full-star"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 100 100"
+          :viewBox="options.viewBox"
           :style="{width: options.size + 'px', height: options.height + 'px'}"
         >
           <path
-            :rating="val[1]"
+            :data-rating="val[1]"
             class="widget-rating-star"
             :stroke="options.stroke"
             :fill="options.fill"
             :stroke-width="options.strokeWidth + 'px'"
-            d="M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z"
+            :d="options.d"
           ></path>
           <title>{{ val[1] }}</title>
         </svg>
-        <svg
-          @click="setRating(val[0])"
-          @mouseenter="hoverEffect(val[0])"
-          class="star-svg half-star"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 50 100"
-          :style="{width: (options.size / 2) + 'px', height: options.height + 'px'}"
+        <div
+          :style="{width: halfStarWidth + 'px', height: options.size + 'px'}"
+          class="half-star-container"
         >
-          <path
-            :rating="val[0]"
-            class="widget-rating-star"
-            :stroke="options.stroke"
-            :fill="options.fill"
-            :stroke-width="options.strokeWidth + 'px'"
-            d="M50 0 l-15 35 -35 5 25 24 -6 35 31 -18"
-          ></path>
-          <title>{{ val[0] }}</title>
-        </svg>
+          <svg
+            @click="setRating(val[0])"
+            @mouseenter="hoverEffect(val[0])"
+            class="star-svg full-star"
+            xmlns="http://www.w3.org/2000/svg"
+            :viewBox="options.viewBox"
+            :style="{width: options.size + 'px', height: options.height + 'px'}"
+          >
+            <path
+              :data-rating="val[0]"
+              class="widget-rating-star"
+              :stroke="options.stroke"
+              :fill="options.fill"
+              :stroke-width="options.strokeWidth + 'px'"
+              :d="options.d"
+            ></path>
+          </svg>
+        </div>
       </div>
     </div>
   </div>
@@ -100,134 +109,97 @@ export default {
       type: Object,
       required: false,
       validator: function(options) {
-        if ("fill" in options) {
-          if (typeof options.fill !== "string") {
-            console.error(
-              "[Stars widget warn]: 'fill' property expected as a string with valid CSS-color. " +
-                typeof options.fill +
-                " given."
-            );
-          }
-          options.fill = options.fill;
-        } else {
+        if (!"fill" in options) {
           options.fill = "#DDD";
+        } else if (typeof options.fill != "string") {
+          console.error(
+            "[Star Rating Widget]: Type of 'fill' property must be 'sring'"
+          );
         }
 
-        if ("stroke" in options) {
-          if (typeof options.stroke !== "string") {
-            console.error(
-              "[Stars widget warn]: 'stroke' property expected as a string with valid CSS-color. " +
-                typeof options.stroke +
-                " given."
-            );
-          }
-          options.stroke = options.stroke;
-        } else {
+        if (!"stroke" in options) {
           options.stroke = "none";
+        } else if (typeof options.stroke != "string") {
+          console.error(
+            "[Star Rating Widget]: Type of 'stroke' property must be 'sring'"
+          );
         }
 
-        if ("strokeWidth" in options) {
-          if (typeof options.strokeWidth !== "number") {
-            console.error(
-              "[Stars widget warn]: 'strokeWidth' property expected as an integer. " +
-                typeof options.strokeWidth +
-                " given."
-            );
-          }
-          options.strokeWidth = options.strokeWidth;
-        } else {
-          options.strokeWidth = 0;
+        if (!"strokeWidth" in options) {
+          options.strokeWidth = 2;
+        } else if (typeof options.strokeWidth != "number") {
+          console.error(
+            "[Star Rating Widget]: Type of 'strokeWidth' property must be 'number'"
+          );
         }
 
-        if ("highlighted" in options) {
-          if (typeof options.highlighted !== "string") {
-            console.error(
-              "[Stars widget warn]: 'highlighted' property expected as a string with valid CSS-color. " +
-                typeof options.highlighted +
-                " given."
-            );
-          }
-          options.highlighted = options.highlighted;
-        } else {
+        if (!"highlighted" in options) {
           options.highlighted = "#FFDF12";
         }
 
-        if ("hover" in options) {
-          if (typeof options.hover !== "string") {
-            console.error(
-              "[Stars widget warn]: 'hover' property expected as a string with valid CSS-color. " +
-                typeof options.hover +
-                " given."
-            );
-          }
-          options.hover = options.hover;
-        } else {
+        if (!"hover" in options) {
           options.hover = "#FFED84";
+        } else if (typeof options.highlighted != "string") {
+          console.error(
+            "[Star Rating Widget]: Type of 'highlighted' property must be 'sring'"
+          );
         }
 
-        if ("size" in options) {
-          if (typeof options.size !== "number") {
-            console.error(
-              "[Stars widget warn]: 'size' property expected as an integer (number). " +
-                typeof options.size +
-                " given."
-            );
-          }
-          options.size = options.size;
-        } else {
+        if (!"size" in options) {
           options.size = 25;
+        } else if (typeof options.size != "number") {
+          console.error(
+            "[Star Rating Widget]: Type of 'size' property must be 'number'"
+          );
         }
 
-        if ("marginRight" in options) {
-          if (typeof options.marginRight !== "number") {
-            console.error(
-              "[Stars widget warn]: 'marginRight' property expected as an integer (number). " +
-                typeof options.marginRight +
-                " given."
-            );
-          }
-          options.marginRight = options.marginRight;
-        } else {
+        if (!"marginRight" in options) {
           options.marginRight = 3;
+        } else if (typeof options.marginRight != "number") {
+          console.error(
+            "[Star Rating Widget]: Type of 'marginRight' property must be 'number'"
+          );
         }
 
-        if ("readOnly" in options) {
-          if (typeof options.readOnly !== "boolean") {
-            console.error(
-              "[Stars widget warn]: 'readOnly' property expected as a boolean. " +
-                typeof options.readOnly +
-                " given."
-            );
-          }
-          options.readOnly = options.readOnly;
-        } else {
+        if (!"readOnly" in options) {
           options.readOnly = false;
+        } else if (typeof options.readOnly != "boolean") {
+          console.error(
+            "[Star Rating Widget]: Type of 'readOnly' property must be 'boolean'"
+          );
         }
 
-        if ("rating" in options) {
-          if (typeof options.rating !== "number") {
-            console.error(
-              "[Stars widget warn]: 'rating' property expected as a number. " +
-                typeof options.rating +
-                " given."
-            );
-          }
-          options.rating = options.rating;
-        } else {
+        if (!"rating" in options) {
           options.rating = 0;
+        } else if (typeof options.rating != "number") {
+          console.error(
+            "[Star Rating Widget]: Type of 'rating' property must be 'number'"
+          );
         }
 
-        if ("starsQuantity" in options) {
-          if (typeof options.starsQuantity !== "number") {
-            console.error(
-              "[Stars widget warn]: 'v' property expected as a number. " +
-                typeof options.starsQuantity +
-                " given."
-            );
-          }
-          options.starsQuantity = options.starsQuantity;
-        } else {
-          options.starsQuantity = 5;
+        if (!"starsQuantity" in options) {
+          options.starsQuantity = 10;
+        } else if (typeof options.starsQuantity != "number") {
+          console.error(
+            "[Star Rating Widget]: Type of 'starsQuantity' property must be 'number'"
+          );
+        }
+
+        if (!"d" in options) {
+          options.d =
+            "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z";
+        } else if (typeof options.d != "string") {
+          console.error(
+            "[Star Rating Widget]: Type of 'd' property must be 'sring'"
+          );
+        }
+
+        if (!"viewBox" in options) {
+          options.viewBox = "0 0 100 100";
+        } else if (typeof options.viewBox != "string") {
+          console.error(
+            "[Star Rating Widget]: Type of 'viewBox' property must be 'sring'"
+          );
         }
 
         return options;
@@ -240,10 +212,12 @@ export default {
           fill: "#DDD",
           highlighted: "#FFDF12",
           hover: "#FFED84",
-          size: 25,
+          size: 100,
           readOnly: false,
           rating: 0,
-          marginRight: 5
+          marginRight: 5,
+          d: "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z",
+          viewBox: "0 0 100 100"
         };
       }
     }
@@ -255,6 +229,17 @@ export default {
       ratingSet: false,
       available_values: []
     };
+  },
+  computed: {
+    halfStarWidth() {
+      if (this.options.readOnly && parseFloat(this.options.rating) > 0) {
+        let rating = parseFloat(this.options.rating);
+        let decimal = rating % 1;
+        return this.options.size * decimal;
+      } else {
+        return this.options.size / 2;
+      }
+    }
   },
   methods: {
     setRating(value) {
@@ -305,7 +290,7 @@ export default {
   },
   beforeMount() {
     /*Defining available values according to stars quantity from options.*/
-    for (let i = 1; i <= this.options.starsQuantity; i++) {
+    for (let i = 1; i <= parseInt(this.options.starsQuantity); i++) {
       let starValues = [];
       starValues.push(i - 0.5);
       starValues.push(i);
@@ -322,11 +307,17 @@ export default {
     /*If is set readOnly property - we need to highlight stars with rating*/
     if (this.options.readOnly) {
       for (let i = 0; i < this.stars.length; i++) {
-        if (
-          parseFloat(this.stars[i].getAttribute("data-rating")) <=
-          this.options.rating
-        ) {
+        let starRating = parseFloat(this.stars[i].getAttribute("data-rating"));
+
+        if (starRating <= parseFloat(this.options.rating)) {
           this.stars[i].setAttribute("fill", this.options.highlighted);
+        } else if (starRating % 1 !== 0) {
+          if (
+            starRating - 0.5 <= parseFloat(this.options.rating) &&
+            parseFloat(this.options.rating) !== 0
+          ) {
+            this.stars[i].setAttribute("fill", this.options.highlighted);
+          }
         }
       }
     }
@@ -336,6 +327,14 @@ export default {
 
 <style lang="scss" scoped>
 .stars-container {
+  .half-star-container {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+  }
+
   .conditional-stars-container {
     display: flex;
   }
