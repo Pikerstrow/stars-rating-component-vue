@@ -13,7 +13,7 @@ Simple star rating component made on Vue.js with a bunch of options and ability 
 <li>Stars can be substituted by other elements</li>
 <li>Each star is divided on two halves (there is ability to set a 3.5 rating for example)</li>
 <li>Customizable color, size, space between stars, color on hover, color on select, color of stroke and stroke width.</li>
-<li>Read only option'</li>
+<li>Read only option</li>
 </ul>
 
 <h2>Demo</h2>

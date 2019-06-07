@@ -206,7 +206,7 @@ export default {
             );
           }
         } else {
-          options.starsQuantity = 10;
+          options.starsQuantity = 5;
         }
 
         if ("d" in options) {
@@ -243,7 +243,7 @@ export default {
           size: 100,
           readOnly: false,
           rating: 0,
-          marginRight: 5,
+          marginRight: 3,
           d:
             "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z",
           viewBox: "0 0 100 100"
