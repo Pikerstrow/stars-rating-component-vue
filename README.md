@@ -172,7 +172,7 @@ Simple star rating component made on Vue.js with a bunch of options and ability 
 
 <h4>Example of Options object:</h4>
 <pre>
-    options: {
+    settings: {
         starsQuantity: 5,
         stroke: 'none',
         strokeWidth: 0,

@@ -1,5 +1,5 @@
 <template>
-  <div class="stars-container" :style="{height: options.size + 'px', width: 'fit-content'}">
+  <div  v-if="options" class="stars-container" :style="{height: options.size + 'px', width: 'fit-content'}">
     <div v-if="options.readOnly" class="conditional-stars-container" style="cursor: auto">
       <div
         v-for="(val, index) in available_values"
@@ -105,14 +105,14 @@ export default {
     value: {
       default: null
     },
-    options: {
+    settings: {
       type: Object,
       required: false,
       validator: function(options) {
         if ("fill" in options) {
           if (typeof options.fill != "string") {
             console.error(
-              "[Star Rating Widget]: Type of 'fill' property must be 'sring'"
+                    "[Star Rating Widget]: Type of 'fill' property must be 'sring'"
             );
           }
         } else {
@@ -122,7 +122,7 @@ export default {
         if ("stroke" in options) {
           if (typeof options.stroke !== "string") {
             console.error(
-              "[Star Rating Widget]: Type of 'stroke' property must be 'sring'"
+                    "[Star Rating Widget]: Type of 'stroke' property must be 'sring'"
             );
           }
         } else {
@@ -132,7 +132,7 @@ export default {
         if ("strokeWidth" in options) {
           if (typeof options.strokeWidth !== "number") {
             console.error(
-              "[Star Rating Widget]: Type of 'strokeWidth' property must be 'number'"
+                    "[Star Rating Widget]: Type of 'strokeWidth' property must be 'number'"
             );
           }
         } else {
@@ -142,7 +142,7 @@ export default {
         if ("highlighted" in options) {
           if (typeof options.highlighted !== "string") {
             console.error(
-              "[Star Rating Widget]: Type of 'highlighted' property must be 'string'"
+                    "[Star Rating Widget]: Type of 'highlighted' property must be 'string'"
             );
           }
         } else {
@@ -152,7 +152,7 @@ export default {
         if ("hover" in options) {
           if (typeof options.hover !== "string") {
             console.error(
-              "[Star Rating Widget]: Type of 'hover' property must be 'sring'"
+                    "[Star Rating Widget]: Type of 'hover' property must be 'sring'"
             );
           }
         } else {
@@ -162,7 +162,7 @@ export default {
         if ("size" in options) {
           if (typeof options.size !== "number") {
             console.error(
-              "[Star Rating Widget]: Type of 'size' property must be 'number'"
+                    "[Star Rating Widget]: Type of 'size' property must be 'number'"
             );
           }
         } else {
@@ -172,7 +172,7 @@ export default {
         if ("marginRight" in options) {
           if (typeof options.marginRight !== "number") {
             console.error(
-              "[Star Rating Widget]: Type of 'marginRight' property must be 'number'"
+                    "[Star Rating Widget]: Type of 'marginRight' property must be 'number'"
             );
           }
         } else {
@@ -182,7 +182,7 @@ export default {
         if ("readOnly" in options) {
           if (typeof options.readOnly !== "boolean") {
             console.error(
-              "[Star Rating Widget]: Type of 'readOnly' property must be 'boolean'"
+                    "[Star Rating Widget]: Type of 'readOnly' property must be 'boolean'"
             );
           }
         } else {
@@ -192,7 +192,7 @@ export default {
         if ("rating" in options) {
           if (typeof options.rating !== "number") {
             console.error(
-              "[Star Rating Widget]: Type of 'rating' property must be 'number'"
+                    "[Star Rating Widget]: Type of 'rating' property must be 'number'"
             );
           }
         } else {
@@ -202,7 +202,7 @@ export default {
         if ("starsQuantity" in options) {
           if (typeof options.starsQuantity != "number") {
             console.error(
-              "[Star Rating Widget]: Type of 'starsQuantity' property must be 'number'"
+                    "[Star Rating Widget]: Type of 'starsQuantity' property must be 'number'"
             );
           }
         } else {
@@ -212,18 +212,18 @@ export default {
         if ("d" in options) {
           if (typeof options.d != "string") {
             console.error(
-              "[Star Rating Widget]: Type of 'd' property must be 'sring'"
+                    "[Star Rating Widget]: Type of 'd' property must be 'sring'"
             );
           }
         } else {
           options.d =
-            "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z";
+                  "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z";
         }
 
         if ("viewBox" in options) {
           if (typeof options.viewBox != "string") {
             console.error(
-              "[Star Rating Widget]: Type of 'viewBox' property must be 'sring'"
+                    "[Star Rating Widget]: Type of 'viewBox' property must be 'sring'"
             );
           }
         } else {
@@ -245,14 +245,19 @@ export default {
           rating: 0,
           marginRight: 3,
           d:
-            "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z",
+                  "M50 0 l-15 35 -35 5 25 24 -6 35 31 -18 31 18 -6 -35 25 -24 -35 -5 -15 -35 z",
           viewBox: "0 0 100 100"
         };
       }
+    },
+    settings_json: {
+      type: String,
+      required: false
     }
   },
   data() {
     return {
+      options: null,
       selectedRating: null,
       stars: null,
       ratingSet: false,
@@ -318,6 +323,18 @@ export default {
     }
   },
   beforeMount() {
+    if (this.settings) {
+      this.options = this.settings;
+    }
+
+    if (this.settings_json) {
+      let extra = JSON.parse(this.settings_json);
+
+      for (let key in extra) {
+        this.options[key] = extra[key];
+      }
+    }
+
     /*Defining available values according to stars quantity from options.*/
     for (let i = 1; i <= parseInt(this.options.starsQuantity); i++) {
       let starValues = [];
