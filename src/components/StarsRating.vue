@@ -15,7 +15,7 @@
         >
           <path
             :data-rating="val[1]"
-            class="widget-rating-star"
+            :class="'widget-rating-star' + dynamic_id"
             :stroke="options.stroke"
             :fill="options.fill"
             :stroke-width="options.strokeWidth + 'px'"
@@ -34,7 +34,7 @@
           >
             <path
               :data-rating="val[0]"
-              class="widget-rating-star"
+              :class="'widget-rating-star' + dynamic_id"
               :stroke="options.stroke"
               :fill="options.fill"
               :stroke-width="options.strokeWidth + 'px'"
@@ -63,7 +63,7 @@
         >
           <path
             :data-rating="val[1]"
-            class="widget-rating-star"
+            :class="'widget-rating-star' + dynamic_id"
             :stroke="options.stroke"
             :fill="options.fill"
             :stroke-width="options.strokeWidth + 'px'"
@@ -85,7 +85,7 @@
           >
             <path
               :data-rating="val[0]"
-              class="widget-rating-star"
+              :class="'widget-rating-star' + dynamic_id"
               :stroke="options.stroke"
               :fill="options.fill"
               :stroke-width="options.strokeWidth + 'px'"
@@ -103,6 +103,9 @@ export default {
   name: "StarsReviews",
   props: {
     value: {
+      default: null
+    },
+    dynamic_id: {
       default: null
     },
     settings: {
@@ -347,7 +350,7 @@ export default {
     this.rating = this.value;
 
     /*Gathering all stars*/
-    let stars = document.getElementsByClassName("widget-rating-star");
+    let stars = document.getElementsByClassName("widget-rating-star" + this.dynamic_id);
     this.stars = stars;
 
     /*If is set readOnly property - we need to highlight stars with rating*/

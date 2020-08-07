@@ -35,6 +35,7 @@ Simple star rating component made on Vue.js with a bunch of options and ability 
 
 <b>a) example of usage with options</b>
 <p><img src="https://user-images.githubusercontent.com/39648888/58760431-527f8200-8540-11e9-9870-973d184e310b.png"></p>
+<b>NOTE: in new version use key 'settings' instead of 'options'</b>
 
 <h4>Available configurations</h4>
 <table>
@@ -187,6 +188,10 @@ Simple star rating component made on Vue.js with a bunch of options and ability 
         viewBox: "0 0 100 100"
     }
 </pre>
+
+<h2>New</h2>
+<p>1. New property <b>'settings_json'</b. It is possible to pass settings as JSON</p>
+<p>2. New property <b>'dynamic_id'</b>. If to display in table (or list) use this property for better performance</p>
 
 <h2>License</h2>
 <p>License: <b>MIT</b>. You are free to use it without any restrictions. But I would very appreciate if you send me an email (oleksandrmischuk@gmail.com) with the name of your country and city/town/village :) </p>
